@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LUXE SHOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <span class="nav-logo">✦</span>
+    <span class="nav-name">LUXE</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#" class="nav-link active" data-page="shop">Collection</a>
+    <a href="#" class="nav-link" data-page="orders">Orders</a>
+    <a href="#" class="nav-link" data-page="transactions">Transactions</a>
+    <a href="#" class="nav-link" data-page="profile">Profile</a>
+  </div>
+  <div class="nav-right">
+    <button class="cart-btn" id="cartBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+    <span class="nav-user-name" id="navUser"></span>
+    <button class="btn-signout" id="logoutBtn" style="display:none">Sign Out</button>
+  </div>
+</nav>
+
+<!-- AUTH PAGE -->
+<div id="authPage" class="page active">
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <div class="auth-decoration">
+        <div class="deco-circle c1"></div>
+        <div class="deco-circle c2"></div>
+        <div class="deco-circle c3"></div>
+      </div>
+      <div class="auth-brand-block">
+        <div class="brand-monogram">L</div>
+        <h1 class="brand-wordmark">LUXE SHOP</h1>
+        <p class="brand-tagline">Curated luxury,<br/><em>delivered with distinction.</em></p>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin">Sign In</button>
+          <button class="auth-tab" id="tabReg">Register</button>
+        </div>
+        <div id="loginForm" class="auth-form active">
+          <div class="field-group">
+            <label class="field-label">Email Address</label>
+            <input class="field-input" id="loginEmail" type="email" placeholder="you@example.com"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Password</label>
+            <input class="field-input" id="loginPass" type="password" placeholder="••••••••"/>
+          </div>
+          <button class="btn-primary full-width" id="loginBtn">Sign In</button>
+          <p class="auth-hint">Demo: demo@luxe.com / demo123</p>
+        </div>
+        <div id="regForm" class="auth-form">
+          <div class="field-group">
+            <label class="field-label">Full Name</label>
+            <input class="field-input" id="regName" type="text" placeholder="Your Name"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Email Address</label>
+            <input class="field-input" id="regEmail" type="email" placeholder="you@example.com"/>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Password</label>
+            <input class="field-input" id="regPass" type="password" placeholder="Min 6 characters"/>
+          </div>
+          <button class="btn-primary full-width" id="regBtn">Create Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP PAGE -->
+<div id="shopPage" class="page">
+  <div class="page-header">
+    <h2 class="page-heading">The Collection</h2>
+    <p class="page-sub">Handpicked essentials for the discerning few</p>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-top">
+    <h3 class="cart-title">Your Selection</h3>
+    <button class="close-btn" id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div id="cartSummary" class="cart-summary"></div>
+    <button class="btn-primary full-width" id="proceedCheckout">Proceed to Checkout →</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal checkout-modal" id="checkoutModal">
+    <div class="modal-head">
+      <h3 class="modal-title">Checkout</h3>
+      <button class="close-btn" id="closeCheckout">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="checkout-section">
+        <h4 class="section-cap">Order Summary</h4>
+        <div id="checkoutItems" class="co-items"></div>
+        <div id="checkoutTotals" class="co-totals"></div>
+      </div>
+      <div class="checkout-section">
+        <h4 class="section-cap">Payment Method</h4>
+        <div class="pay-grid">
+          <label class="pay-opt"><input type="radio" name="payMethod" value="credit" checked/><span>Credit Card</span></label>
+          <label class="pay-opt"><input type="radio" name="payMethod" value="debit"/><span>Debit Card</span></label>
+          <label class="pay-opt"><input type="radio" name="payMethod" value="upi"/><span>UPI</span></label>
+          <label class="pay-opt"><input type="radio" name="payMethod" value="cod"/><span>Cash on Delivery</span></label>
+        </div>
+      </div>
+      <div class="checkout-section" id="cardSection">
+        <h4 class="section-cap">Select Card</h4>
+        <div id="cardList" class="co-card-list"></div>
+      </div>
+      <div class="checkout-section" id="emiSection" style="display:none">
+        <h4 class="section-cap">EMI Options</h4>
+        <div class="emi-grid" id="emiOpts">
+          <label class="emi-opt"><input type="radio" name="emiMonths" value="0" checked/><span>Full Payment</span></label>
+          <label class="emi-opt"><input type="radio" name="emiMonths" value="3"/><span>3 Mo · 1%</span></label>
+          <label class="emi-opt"><input type="radio" name="emiMonths" value="6"/><span>6 Mo · 1.5%</span></label>
+          <label class="emi-opt"><input type="radio" name="emiMonths" value="9"/><span>9 Mo · 1.75%</span></label>
+          <label class="emi-opt"><input type="radio" name="emiMonths" value="12"/><span>12 Mo · 2%</span></label>
+        </div>
+        <div class="emi-preview" id="emiPreview"></div>
+      </div>
+      <div class="checkout-section" id="pinSection" style="display:none">
+        <h4 class="section-cap">Authorise Payment</h4>
+        <p class="pin-desc">Enter your 4-digit card PIN</p>
+        <div class="pin-row" id="checkoutPinRow"></div>
+      </div>
+      <button class="btn-primary full-width" id="placeOrderBtn" style="margin-top:1.75rem">Place Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS PAGE -->
+<div id="ordersPage" class="page">
+  <div class="page-header">
+    <h2 class="page-heading">Your Orders</h2>
+    <p class="page-sub">Your complete purchase history</p>
+  </div>
+  <div id="ordersList" class="list-container"></div>
+</div>
+
+<!-- TRANSACTIONS PAGE -->
+<div id="transactionsPage" class="page">
+  <div class="page-header">
+    <h2 class="page-heading">Transactions</h2>
+    <p class="page-sub">All payment records</p>
+  </div>
+  <div id="txnList" class="list-container"></div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="profilePage" class="page">
+  <div class="page-header">
+    <h2 class="page-heading">My Profile</h2>
+    <p class="page-sub">Manage your account &amp; cards</p>
+  </div>
+  <div class="profile-grid">
+    <div class="profile-info" id="profileInfo"></div>
+    <div class="profile-cards-col">
+      <div class="profile-cards-head">
+        <h4 class="section-cap">Saved Cards</h4>
+        <button class="btn-outline" id="addCardBtn">+ Add Card</button>
+      </div>
+      <div id="profileCards"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD CARD MODAL -->
+<div class="modal-overlay" id="addCardOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="modal-title">Add New Card</h3>
+      <button class="close-btn" id="closeAddCard">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field-group span-2">
+          <label class="field-label">Card Holder Name</label>
+          <input class="field-input" id="newCardHolder" placeholder="As on card"/>
+        </div>
+        <div class="field-group span-2">
+          <label class="field-label">Card Number</label>
+          <input class="field-input" id="newCardNumber" placeholder="•••• •••• •••• ••••" maxlength="19"/>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Expiry</label>
+          <input class="field-input" id="newCardExpiry" placeholder="MM/YY" maxlength="5"/>
+        </div>
+        <div class="field-group">
+          <label class="field-label">CVV</label>
+          <div class="inline-digits" id="cvvRow"></div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Card Type</label>
+          <select class="field-input" id="newCardType">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Network</label>
+          <select class="field-input" id="newCardNetwork">
+            <option>Visa</option><option>Mastercard</option><option>RuPay</option><option>Amex</option>
+          </select>
+        </div>
+        <div class="field-group span-2">
+          <label class="field-label">Bank Name</label>
+          <input class="field-input" id="newBankName" placeholder="e.g. HDFC Bank"/>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Credit Limit (₹)</label>
+          <input class="field-input" id="newCreditLimit" type="number" placeholder="100000"/>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Monthly Limit (₹)</label>
+          <input class="field-input" id="newMonthlyLimit" type="number" placeholder="50000"/>
+        </div>
+      </div>
+      <button class="btn-primary full-width" id="saveCardBtn" style="margin-top:1.25rem">Save Card</button>
+    </div>
+  </div>
+</div>
+
+<!-- SET PIN MODAL -->
+<div class="modal-overlay" id="setPinOverlay">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <h3 class="modal-title">Set Card PIN</h3>
+      <button class="close-btn" id="closeSetPin">✕</button>
+    </div>
+    <div class="modal-body pin-modal-body">
+      <p class="pin-card-label" id="setPinCardLabel"></p>
+      <p class="pin-desc">Choose a secure 4-digit PIN</p>
+      <div class="pin-row" id="setPinRow"></div>
+      <button class="btn-primary" id="confirmSetPin">Confirm PIN</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT MODAL -->
+<div class="modal-overlay" id="resultOverlay">
+  <div class="modal modal-sm">
+    <div class="modal-body result-body" id="resultBody"></div>
+  </div>
+</div>
+
+<script src="/static/js/db.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
