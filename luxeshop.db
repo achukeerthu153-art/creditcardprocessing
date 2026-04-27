@@ -1,0 +1,202 @@
+SQLite format 3   @     X   	                                                            X .Š
+† ‚ ÍÍ{‚/	 î:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      …5 ŠItablecardscardsCREATE TABLE cards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        card_type TEXT NOT NULL DEFAULT 'credit',
+        card_holder TEXT NOT NULL,
+        last4 TEXT NOT NULL,
+        expiry TEXT NOT NULL,
+        card_network TEXT DEFAULT 'Visa',
+        credit_limit REAL DEFAULT 100000,
+        balance REAL DEFAULT 100000,
+        monthly_limit REAL DEFAULT 50000,
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    , bank_name TEXT DEFAULT '', card_color TEXT DEFAULT 'default', pin_hash      TEXT DEFAULT NULL, pin           TEXT DEFAULT NULL, card_tier     TEXT DEFAULT 'Silver', total_spent   REAL DEFAULT 0)ƒ1 %%†%tabletransactionstransactions	CREATE TABLE transactions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        order_id INTEGER NOT NULL,
+        card_id INTEGER,
+        amount REAL NOT NULL,
+        payment_method TEXT,
+        status TEXT DEFAULT 'APPROVED',
+        txn_ref TEXT,
+        decline_reason TEXT DEFAULT '',
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    )‚  ##ƒ{tableorder_itemsorder_itemsCREATE TABLE order_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        order_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        qty INTEGER NOT NULL,
+        unit_price REAL NOT NULL,
+        line_total REAL NOT NULL
+    )„! ˆtableordersorders CREATE TABLE orders (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        card_id INTEGER,
+        subtotal REAL NOT NULL,
+        shipping REAL DEFAULT 0,
+        tax REAL DEFAULT 0,
+        total REAL NOT NULL,
+        payment_method TEXT DEFAULT 'credit',
+        emi_months INTEGER DEFAULT 0,
+        emi_monthly_amount REAL DEFAULT 0,
+        emi_interest REAL DEFAULT 0,
+        status TEXT DEFAULT 'APPROVED',
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    )‚T „{tableproductsproductsCREATE TABLE products (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        tag TEXT NOT NULL,
+        emoji TEXT NOT NULL,
+        price REAL NOT NULL,
+        stock INTEGER DEFAULT 100,
+        description TEXT,
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    )øõ‡CtablecardscardsCREATE TABLE cards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        card_type TEXT NOT NULL DEFAULT 'credit',
+        card_holder TEXT NOT NULL,
+        last4 TEXT NOT NULL,
+        expiry TEXT NOT NULL,
+        card_network TEXT DEFAULT 'Visa',
+        credit_limit REAL DEFAULT 100000,
+        balance REAL DEFAULT 100000,
+        monthly_limit REAL DEFAULT 50000,
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    )P++Ytablesqlite_sequencesqlite_sequenceCREATE TABLE sqlite_sequence(name,seq)} ƒYtableusersusersCREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        created_at TEXT DEFAULT (datetime('now','localtime'))
+    ))= indexsqlite_autoindex_users_1users       
+     ÈŽU                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 3 +3Asikaasika@gmail.com1234562026-04-02 20:10:167 13Ashikaashika15@gmail.com1234562026-03-27 15:55:388 53Asikaasika30006@gmail.com1234562026-03-27 14:21:516 '3Demo Userdemo@luxe.comdemo1232026-03-27 09:23:52
+   « ¿Ö«ï                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           +asika@gmail.com1ashika15@gmail.com5asika30006@gmail.com'	demo@luxe.com
+¦ š òÒÝšÁ¯                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+ordersè 		tran%transactions#order_items	users	cards   
+	usersproducts
+M w ºv ‚PŒ
+ê
+•
+Eõ¥æ ³f
+Ì
+
+2	å	˜	Kþ±dš/w                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     75 ! 3#
+  creditSANGEETHA142411/35Mastercard[`AúzáHš(2026-04-02 20:16:28INDIAN BANKdefault03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4Gold@ét®zái !3#  creditPAVITHRAN122411/35Mastercard
+@
+@ ÃP2026-04-02 20:14:17INDIAN BANKdefaultSilver3 ! 3#
+  creditASIKA123411/35Mastercard† @è¡¼ÌÌÌÎ ÃP2026-04-02 20:11:14INDIAN BANKdefault03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4Silver@è2C3333  3
+
+ creditAshika341303/29Visa† @õæLzáG­ ÃP2026-03-27 14:31:29default03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4 3#
+ creditAgalya678810/30Visa† †  ÃP2026-03-31 12:46:34indian bankdefault03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4  3
+
+ creditAsika345603/28Visa† @öíŒzáG­ ÃP2026-03-27 14:24:31default03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4K 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:27:22defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:27:21defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:27:04defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:26:08defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:26:07defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:26:07defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:26:06defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:54defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:54defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:53defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:49defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:37defaultK
+ 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:36defaultK 3
+creditAshika345610/30Visa† †  ÃP2026-03-31 13:25:32defaultB X3#creditAgalya678810/30Visa† †  ÃP2026-03-31 12:46:34indian bankdefaultN
+ 3
+creditAshika345609/28Maestro† †  ÃP2026-03-27 16:24:51defaultN	 3
+creditAshika345609/28Maestro† †  ÃP2026-03-27 16:24:47defaultN 3
+creditAshika345609/28Maestro† †  ÃP2026-03-27 16:24:45defaultS   3
+creditkanishka141205/29RuPay† @÷²{×
+=q ÃP2026-03-27 16:00:43defaultV ! 3
+creditAshika341303/30Mastercard† @öáG® ÃP2026-03-27 15:56:54default" J 3
+creditKalai345608/30RuPay† @÷úÕ¸Qì ÃP2026-03-27 15:52:0  3
+
+ creditKalai345608/30RuPay† @÷úÕ¸Qì ÃP2026-03-27 15:52:03default03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4   T 3
+  creditAshika341303/29Visa† @öLI™™™™ ÃP2026-03-27 14:31:29defaultB 	3debitDemo User888808/26RuPay ÃP~ôu02026-03-27 09:23:52D 	3creditDemo User424212/27Visa† L ÃP2026-03-27 09:23:52
+   ý ”-Ìg
+°
+Tý                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     U	 %M3Coffee MakerKitchenâ˜•ãF12-cup drip, programmable timer.2026-03-27 09:23:52Z 	 'Q3Running ShoesFootwearðŸ‘Ÿ{XLightweight, breathable mesh sole.2026-03-27 09:23:52T	 #I3Smart WatchWearablesâŒš2Ç8AMOLED display, 7-day battery.2026-03-27 09:23:52_	 )]3Luxury PerfumeBeautyðŸ§´
+«wWoody-floral notes, 100ml, long lasting.2026-03-27 09:23:52c	 !#[3SunglassesAccessoriesðŸ•¶ï¸— ”UV400 polarised lenses, titanium frame.2026-03-27 09:23:52_	 )#Q3Leather WalletAccessoriesðŸ‘œ ÀFull-grain leather, RFID blocking.2026-03-27 09:23:52e	 3#Q3Mechanical KeyboardElectronicsâŒ¨ï¸“MTKL layout, tactile switches, RGB.2026-03-27 09:23:52j	 C#O3Noise-Cancelling HeadphonesElectronicsðŸŽ§?bPremium sound, 30hr battery, ANC.2026-03-27 09:23:52
+    ºcÆo*
+Ó
+
+6ð«f!Û–Q                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 D   3c@m:=p£×
+@™G®zácreditAPPROVED2026-04-02 20:20:17C   3HB@ªG®zá@ÕPèõÂ\creditAPPROVED2026-04-02 20:17:31C   3^è@±G®zá@ÛÿQë…¸creditAPPROVED2026-04-02 20:16:57D   3c@m:=p£×
+@™G®zácreditDECLINED2026-04-02 20:15:25C
+   3DZ@¨›G®zá@Ô)èõÂ\creditAPPROVED2026-04-02 20:15:10C   3qE@´cuÂ\)@àµ¸Që…creditDECLINED2026-04-02 20:14:43C   3_±@±9uÂ\)@Ü:p£×
+creditAPPROVED2026-04-02 20:12:37D
+   3c@m:=p£×
+@™G®zácreditAPPROVED2026-03-31 17:11:52U	     3
+&c@}:=p£×
+@¨¹G®zácredit@ú¸Që…@W¼(õÂ\APPROVED2026-03-31 17:06:24D   3QÚ@Îh™™™š@øê£3333creditDECLINED2026-03-27 16:02:12U      3 —c@x½¸Që…@¥£×
+=qcredit@~–záG®@nNzáG®APPROVED2026-03-27 16:01:02C   3?@–G®zá@ÂohõÂ\creditAPPROVED2026-03-27 15:57:10U     3c@m:=p£×
+@™G®zácredit@r‡33333@b[…¸QìAPPROVED2026-03-27 15:52:19U     3—c@x½¸Që…@¥£×
+=qcredit@Œç
+=p£×@T3×
+=p¤APPROVED2026-03-27 15:16:32D   3“c@‰N\(õÃ@µÑë…¸creditAPPROVED2026-03-27 14:31:29U     3c@m:=p£×
+@™G®zácredit@‚záG®@Hy™™™™šAPPROVED2026-03-27 14:27:08D   3c@m:=p£×
+@™G®zácreditAPPROVED2026-03-27 14:24:31
+   ? òãÔÅ¶¨™‹|m^M>.óäÕÆ·¨™Š{l]N?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+  	
+  	 {{
+  	2Ç2Ç
+  	 {{
+  	2Ç2Ç
+  	
+  	““
+  	
+  	
+2Ç2Ç
+  	
+““
+  	2Ç2Ç
+  	?>~
+  	2Ç2Ç
+  	
+«
+«  		??
+  	
+  	
+&
+
+  	 {{  2Ç ýã
+  	——
+  	
+	  	““  		??
+   	 ——  		??
+  	
+  	——
+  	““
+  	  		
+   
+¸ ¿};ù·u3
+©
+g
+%ãP~<
+ú
+¸                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @  
+3@™G®zácreditAPPROVEDTXN0000172026-04-02 20:20:17@  
+3@ÕPèõÂ\creditAPPROVEDTXN0000162026-04-02 20:17:32@  
+3@ÛÿQë…¸creditAPPROVEDTXN0000152026-04-02 20:16:57
+  %3@™G®zácreditDECLINEDTXN000014Monthly limit exceeded. Limit â‚¹50,000 | Spent â‚¹49,554 | Remaining â‚¹4462026-04-02 20:15:25@
+  
+3
+@Ô)èõÂ\creditAPPROVEDTXN0000132026-04-02 20:15:11  +3@àµ¸Që…creditDECLINEDTXN000012Monthly limit exceeded. Limit â‚¹50,000 | Spent â‚¹28,906 | Remaining â‚¹21,0942026-04-02 20:14:43@  
+3@Ü:p£×
+creditAPPROVEDTXN0000112026-04-02 20:12:37@
+  
+3
+@™G®zácreditAPPROVEDTXN0000102026-03-31 17:11:52@	  
+3	@©w(õÂ\creditAPPROVEDTXN0000092026-03-31 17:06:24   3@øê£3333creditDECLINEDTXN000008Insufficient balance. Available: â‚¹90,561.18, Required: â‚¹102,058.202026-03-27 16:02:12@   
+3  @¦ð…¸QìcreditAPPROVEDTXN0000072026-03-27 16:01:02@  
+3@ÂohõÂ\creditAPPROVEDTXN0000062026-03-27 15:57:10@  
+3@›Ê¸Që…creditAPPROVEDTXN0000052026-03-27 15:52:20@  
+3@¥­B\(öcreditAPPROVEDTXN0000042026-03-27 15:16:32@  
+3@µÑë…¸creditAPPROVEDTXN0000032026-03-27 14:31:29@  
+3@šCzáG®creditAPPROVEDTXN0000022026-03-27 14:27:08? 	 
+3@™G®zácreditAPPROVEDTXN0000012026-03-27 14:24:31
